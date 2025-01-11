@@ -26,4 +26,4 @@ const cryptoPriceSchema = new mongoose.Schema({
 
 cryptoPriceSchema.index({ coinId: 1, timestamp: -1 });
 
-module.exports = mongoose.model("CryptoPrice", cryptoPriceSchema);
+module.exports = mongoose.model("cryptoPrice", cryptoPriceSchema);
