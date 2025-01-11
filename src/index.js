@@ -1,11 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const cryptoRoutes = require("./routes/crypto");
 const { startPriceTracker } = require("./jobs/priceTracker");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(cors());
 
 mongoose
   .connect(process.env.MONGODB_URI, {
