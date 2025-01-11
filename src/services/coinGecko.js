@@ -8,15 +8,15 @@ class CoinGeckoService {
 
   async getCoinData(coinId) {
     try {
-      const response = await axios.get(
-        `${this.baseUrl}/simple/price?ids=${coinId}&vs_currencies=usd&include_market_cap=true&include_24hr_change=true&x_cg_demo_api_key=${this.apiKey}`
-      );
+      const url = `${this.baseUrl}/coins/markets?vs_currency=usd&ids=${coinId}&x_cg_demo_api_key=${this.apiKey}`;
 
-      const data = response.data[coinId];
+      const response = await axios.get(url);
+
+      const data = response.data[0];
       return {
-        priceUsd: data.usd,
-        marketCapUsd: data.usd_market_cap,
-        change24h: data.usd_24h_change,
+        priceUsd: data.current_price,
+        marketCapUsd: data.market_cap,
+        change24h: data.price_change_percentage_24h,
       };
     } catch (error) {
       console.error(`Error fetching data for ${coinId}:`, error.message);
